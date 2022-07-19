@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from twitter_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('adduser/', views.add_user),
+    path('users/', views.show_users),
+    path('addtweet/', views.add_tweet),
+    path('tweets/', views.show_tweets),
 ]

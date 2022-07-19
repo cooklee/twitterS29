@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'twitter.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'twitter',
+       'USER': 'postgres',
+       'PASSWORD': 'vetjopoco',
+       'HOST': 'localhost',
+       'PORT': 5432,
     }
 }
 
@@ -107,7 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
+
 
 USE_I18N = True
 
