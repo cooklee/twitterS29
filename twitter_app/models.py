@@ -10,6 +10,7 @@ class User(models.Model):
 class Tweet(models.Model):
     text = models.CharField(max_length=128)
     date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.text} - {self.date.strftime('%Y %m %d %H:%M')}"
+        return f"{self.text} {self.author.username}"

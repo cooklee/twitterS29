@@ -24,9 +24,12 @@ def show_users(request):
 
 def add_tweet(request):
     if request.method == 'GET':
-        return render(request, 'add_tweet.html')
+        users = User.objects.all()
+        return render(request, 'add_tweet.html', {'users':users})
     text = request.POST['text']
-    Tweet.objects.create(text=text)
+    user_id = request.POST['user_id']
+    user = User.objects.get(pk=user_id)
+    Tweet.objects.create(text=text, author=user)
     return redirect('/tweets/')
 
 
