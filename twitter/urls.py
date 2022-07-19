@@ -19,6 +19,7 @@ from twitter_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index),
     path('adduser/', views.add_user),
     path('users/', views.show_users),
     path('addtweet/', views.add_tweet),

@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from twitter_app.models import User, Tweet
 
+def index(request):
+    return render(request, 'base.html')
+
 
 def add_user(request):
     if request.method == 'GET':

@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
 <form method="post">
     {% csrf_token %}
     <input type="text" name="text" placeholder="text">
@@ -8,3 +10,4 @@
     </select>
     <input type="submit">
 </form>
+{% endblock %}
