@@ -24,5 +24,6 @@ urlpatterns = [
     path('users/', views.show_users),
     path('addtweet/', views.add_tweet),
     path('tweets/', views.show_tweets),
-    path('login/', views.LoginView.as_view())
+    path('login/', views.LoginView.as_view()),
+    path('logout/', views.LogoutView.as_view())
 ]

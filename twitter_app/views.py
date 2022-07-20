@@ -58,3 +58,11 @@ class LoginView(View):
             return render(request, 'login.html',{'message':'logowanie udane'})
         except User.DoesNotExist:
             return render(request, 'login.html', {'message':'nie poprawne dane'})
+
+
+class LogoutView(View):
+
+    def get(self, request):
+        if 'user_id' in request.session:
+            del request.session['user_id']
+        return redirect('/')
