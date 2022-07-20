@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block zawartosc %}
+
 <ul>
     {% for tweet in tweets %}
     <li>{{ tweet }}</li>
     {% endfor %}
 </ul>
+
 {% endblock %}

@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.views import View
+
 from twitter_app.models import User, Tweet
 
 def index(request):
@@ -26,11 +28,12 @@ def show_users(request):
     return render(request, 'user_list.html', {'users': users})
 
 def add_tweet(request):
+    user_id = request.session.get('user_id')
+    if user_id is None:
+        return redirect('/login/')
     if request.method == 'GET':
-        users = User.objects.all()
-        return render(request, 'add_tweet.html', {'users':users})
+        return render(request, 'add_tweet.html')
     text = request.POST['text']
-    user_id = request.POST['user_id']
     user = User.objects.get(pk=user_id)
     Tweet.objects.create(text=text, author=user)
     return redirect('/tweets/')
@@ -40,3 +43,18 @@ def show_tweets(request):
     tweets = Tweet.objects.all().order_by('date')
     return render(request, 'tweet_list.html', {'tweets': tweets})
 
+
+class LoginView(View):
+
+    def get(self, request):
+        return render(request, 'login.html')
+
+    def post(self, request):
+        username = request.POST['username']
+        password = request.POST['password']
+        try:
+            user = User.objects.get(username=username, password=password)
+            request.session['user_id'] = user.id
+            return render(request, 'login.html',{'message':'logowanie udane'})
+        except User.DoesNotExist:
+            return render(request, 'login.html', {'message':'nie poprawne dane'})

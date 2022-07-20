@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+
+    <form method="post">
+    {% csrf_token %}
+        <input type="text" name="username" placeholder="username">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" value="login">
+    </form>
+    <h1>{{ message }}</h1>
+{% endblock %}
