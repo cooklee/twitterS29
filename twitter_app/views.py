@@ -4,7 +4,8 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.views import View
 
-from twitter_app.models import User, Tweet
+from twitter_app.models import User, Tweet, Group
+
 
 def index(request):
     return render(request, 'base.html')
@@ -37,6 +38,27 @@ def add_tweet(request):
     user = User.objects.get(pk=user_id)
     Tweet.objects.create(text=text, author=user)
     return redirect('/tweets/')
+
+class AddGroupView(View):
+    def get(self, request):
+        user_id = request.session.get('user_id')
+        if user_id is None:
+            return redirect('/login/')
+        return render(request, 'add_group.html')
+
+    def post(self, request):
+        user_id = request.session.get('user_id')
+        if user_id is None:
+            return redirect('/login/')
+        name = request.POST['name']
+        user = User.objects.get(pk=user_id)
+        Group.objects.create(name=name, owner=user)
+        return redirect('/groups/')
+
+class ListGroupView(View):
+    def get(self, request):
+        groups = Group.objects.all()
+        return render(request, 'groups.html', {'groups':groups})
 
 
 def show_tweets(request):
@@ -92,4 +114,14 @@ class SetCookieLanguage(View):
         return http_response
 
 
+class JoinGroupView(View):
+
+    def get(self, request, id):
+        user_id = request.session.get('user_id')
+        if user_id is None:
+            return redirect('/')
+        g = Group.objects.get(id=id)
+        u = User.objects.get(pk=user_id)
+        g.users.add(u)
+        return redirect('/groups/')
 

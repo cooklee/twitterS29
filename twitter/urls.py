@@ -27,5 +27,8 @@ urlpatterns = [
     path('login/', views.LoginView.as_view()),
     path('logout/', views.LogoutView.as_view()),
     path('del_user/<int:id>/', views.DelUserView.as_view()),
-    path('set_lang/', views.SetCookieLanguage.as_view())
+    path('set_lang/', views.SetCookieLanguage.as_view()),
+    path('add_group/', views.AddGroupView.as_view()),
+    path('groups/', views.ListGroupView.as_view()),
+    path('join_group/<int:id>/', views.JoinGroupView.as_view())
 ]

@@ -4,6 +4,7 @@ from django.db import models
 class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
+    #my_groups
 
 
 class Tweet(models.Model):
@@ -17,4 +18,6 @@ class Tweet(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=128)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE,
+                              related_name='my_groups')
+    users = models.ManyToManyField(User)

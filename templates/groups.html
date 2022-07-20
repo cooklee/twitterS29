@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+    <ul>
+    {% for g in groups %}
+        <li> {{ g.name }} <a href="/join_group/{{ g.id }}/"> dołącz</a>
+            <ul>
+                {% for u in g.users.all %}
+                    <li>{{ u.username }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
