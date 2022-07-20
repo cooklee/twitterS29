@@ -25,5 +25,7 @@ urlpatterns = [
     path('addtweet/', views.add_tweet),
     path('tweets/', views.show_tweets),
     path('login/', views.LoginView.as_view()),
-    path('logout/', views.LogoutView.as_view())
+    path('logout/', views.LogoutView.as_view()),
+    path('del_user/<int:id>/', views.DelUserView.as_view()),
+    path('set_lang/', views.SetCookieLanguage.as_view())
 ]

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+    <form method="post">
+        {% csrf_token %}
+        <select name="ln">
+            <option>Pl</option>
+            <option>ANG</option>
+            <option>UK</option>
+            <option>JAP</option>
+            <option>FR</option>
+        </select>
+        <input type="submit">
+    </form>
+{% endblock %}

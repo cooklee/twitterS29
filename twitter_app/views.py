@@ -66,3 +66,30 @@ class LogoutView(View):
         if 'user_id' in request.session:
             del request.session['user_id']
         return redirect('/')
+
+class DelUserView(View):
+
+    def get(self, request, id):
+        return render(request, 'del_user_form.html',
+                      {'user':User.objects.get(pk=id)})
+
+    def post(self, request, id):
+        if request.POST['potwierdzenie'] == 'tak':
+            u = User.objects.get(pk=id)
+            u.delete()
+        return redirect('/')
+
+
+class SetCookieLanguage(View):
+
+    def get(self, request):
+        return render(request, 'set_language.html')
+
+    def post(self, request):
+        lang = request.POST['ln']
+        http_response = redirect('/')
+        http_response.set_cookie('ln', lang)
+        return http_response
+
+
+
