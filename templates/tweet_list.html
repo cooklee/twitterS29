@@ -4,8 +4,15 @@
 
         <input type="text" name="text" placeholder="Tweet text">
         <input type="text" name="username" placeholder="username">
+        <select name="urgent">
+                <option value="0">---------</option>
+            {% for urgent in URGENT %}
+                <option value="{{ urgent.0 }}">{{ urgent.1 }}</option>
+            {% endfor %}
+
+        </select>
         <input type="submit">
-    </form>f
+    </form>
 
     <ul>
         {% for tweet in tweets %}

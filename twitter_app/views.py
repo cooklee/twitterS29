@@ -64,9 +64,12 @@ class ListGroupView(View):
 def show_tweets(request):
     search_text = request.GET.get('text', '')
     username = request.GET.get('username', '')
+    urgent = request.GET.get('urgent', '0')
     tweets = Tweet.objects.filter(text__icontains=search_text).order_by('date')
     tweets = tweets.filter(author__username__icontains=username)
-    return render(request, 'tweet_list.html', {'tweets': tweets})
+    if urgent != '0':
+        tweets = tweets.filter(urgent=urgent)
+    return render(request, 'tweet_list.html', {'tweets': tweets, 'URGENT':URGENT})
 
 
 class LoginView(View):

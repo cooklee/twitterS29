@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'twitter.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'twitter',
-       'USER': 'postgres',
-       'PASSWORD': 'vetjopoco',
-       'HOST': 'localhost',
-       'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db2.sqlite3',
     }
 }
 
