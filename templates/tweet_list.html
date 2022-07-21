@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block zawartosc %}
+    <form method="GET">
 
-<ul>
-    {% for tweet in tweets %}
-    <li>{{ tweet }}</li>
-    {% endfor %}
-</ul>
+        <input type="text" name="text" placeholder="Tweet text">
+        <input type="text" name="username" placeholder="username">
+        <input type="submit">
+    </form>f
+
+    <ul>
+        {% for tweet in tweets %}
+            <li>{{ tweet }} <small>{{ tweet.get_urgent_display }}</small></li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

@@ -1,10 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
 # Create your views here.
 from django.views import View
 
-from twitter_app.models import User, Tweet, Group
+from twitter_app.models import User, Tweet, Group, URGENT
 
 
 def index(request):
@@ -33,10 +32,11 @@ def add_tweet(request):
     if user_id is None:
         return redirect('/login/')
     if request.method == 'GET':
-        return render(request, 'add_tweet.html')
+        return render(request, 'add_tweet.html', {'urgent':URGENT})
     text = request.POST['text']
+    urgent = request.POST['urgent']
     user = User.objects.get(pk=user_id)
-    Tweet.objects.create(text=text, author=user)
+    Tweet.objects.create(text=text, author=user, urgent=urgent)
     return redirect('/tweets/')
 
 class AddGroupView(View):
@@ -62,7 +62,10 @@ class ListGroupView(View):
 
 
 def show_tweets(request):
-    tweets = Tweet.objects.all().order_by('date')
+    search_text = request.GET.get('text', '')
+    username = request.GET.get('username', '')
+    tweets = Tweet.objects.filter(text__icontains=search_text).order_by('date')
+    tweets = tweets.filter(author__username__icontains=username)
     return render(request, 'tweet_list.html', {'tweets': tweets})
 
 
