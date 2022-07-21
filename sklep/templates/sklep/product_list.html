@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+    <ul>
+    {% for product in products %}
+        <li> {{ product.name }} {{ product.price }}
+            <a href="{% url 'add_to_cart' product.id%}">+</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

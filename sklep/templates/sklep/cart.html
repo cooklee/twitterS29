@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block zawartosc %}
+    <table>
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>ilosc</th>
+            <th>cena</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pic in user.cart_set.all %}
+            <tr>
+                <td>{{ pic.product.name }}</td>
+                <td>{{ pic.amount }}</td>
+                <td>{{ pic.product.price }}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>Suma: {{ user.get_sum }}</th>
+            </tr>
+        </tbody>
+
+
+    </table>
+{% endblock %}

@@ -12,7 +12,13 @@ URGENT = (
 class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
+
     # my_groups
+    def get_sum(self):
+        suma = 0
+        for item in self.cart_set.all():
+            suma += item.amount * item.product.price
+        return suma
 
 
 class Tweet(models.Model):
